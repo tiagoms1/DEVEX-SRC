@@ -1,0 +1,23 @@
+      <Context docBase="GalaxyTicketsTheatre" path="/GalaxyTicketsTheatre" reloadable="true" source="org.eclipse.jst.jee.server:GalaxyTicketsTheatre">
+			<Resource name="jdbc/TheatreDB"
+						auth="Container"
+						type="javax.sql.DataSource"
+						username="root"
+						password="sadb123"
+						driverClassName="com.mysql.jdbc.Driver"
+						url="jdbc:mysql://localhost:3306/ticketsgalaxy_theatre"
+						maxActive="15"
+						maxIdle="3"/>
+      </Context>
+      
+      <Context docBase="GalaxyTicketsWeb" path="/GalaxyTicketsWeb" reloadable="true" source="org.eclipse.jst.jee.server:GalaxyTicketsWeb">
+			<Resource name="jdbc/TicketsDB"
+						auth="Container"
+						type="javax.sql.DataSource"
+						username="root"
+						password="sadb123"
+						driverClassName="com.mysql.jdbc.Driver"
+						url="jdbc:mysql://localhost:3306/ticketsgalaxy_web"
+						maxActive="15"
+						maxIdle="3"/>
+      </Context>

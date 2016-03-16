@@ -1,0 +1,137 @@
+package obi1.fi.web.controller;
+
+import java.util.GregorianCalendar;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import obi1.fi.business.entity.FiCdClienteCLIE;
+import obi1.fi.business.entity.FiNgCompraCOMP;
+import obi1.fi.business.service.CompraService;
+import obi1.fi.business.service.GenericService;
+import obi1.fi.business.service.TheatreWSProxy;
+import obi1.fi.business.to.CompraTO;
+import obi1.fi.business.to.EventoWSTO;
+import obi1.fi.common.exception.FiException;
+
+@Controller
+@RequestMapping("Ticket")
+@Scope("request")
+public final class TicketController extends AbstractController {
+
+	private EventoWSTO eventoTO;
+	
+	private TheatreWSProxy theatreWS;
+	
+	@Autowired
+	private CompraService compraService;
+	
+	@Autowired
+	private GenericService gService;
+	
+	public TicketController() {
+		eventoTO = new EventoWSTO();
+		theatreWS = new TheatreWSProxy();
+	}
+
+	@RequestMapping("load")
+	public ModelAndView load(HttpServletRequest request, EventoWSTO eventoTO) {
+		ModelAndView model = new ModelAndView("tiles.ticketsList");
+		
+		this.eventoTO.setEvenCdTipo(eventoTO.getEvenCdTipo());
+		this.eventoTO.setEvenDsTitulo(eventoTO.getEvenDsTitulo());
+		
+		return model;
+	}
+
+	@RequestMapping("sales")
+	public String sales(HttpServletRequest request) {
+		return "tiles.ticketsSales";
+	}
+
+	@RequestMapping("retrieveSales")
+	@ResponseBody
+	public String retrieveSales(HttpServletRequest request) {
+
+		FiNgCompraCOMP[] resultList;
+		
+		try {
+			resultList = compraService.findAll(getCurrentUser(request).getId());
+		}
+		catch (Exception x) {
+			throw new FiException(x);
+		}
+		
+		
+		Map<String, Object> jsonMap;
+		jsonMap = new LinkedHashMap<String, Object>();
+		jsonMap.put("result", resultList);
+		return new JSONObject(jsonMap).toString();
+	}
+	
+	@RequestMapping("retrieve")
+	@ResponseBody
+	public String retrieve(EventoWSTO eventoTO) {
+		EventoWSTO[] result = null;
+		
+		try {
+			result = theatreWS.findEventos(0, eventoTO.getEvenCdTipo(), eventoTO.getEvenDsTitulo());
+		}
+		catch (Exception x) {
+			throw new FiException(x);
+		}
+
+		Map<String, Object> jsonMap;
+		jsonMap = new LinkedHashMap<String, Object>();
+		jsonMap.put("result", result);
+		return new JSONObject(jsonMap).toString();
+	}
+
+	@RequestMapping("buy")
+	@ResponseBody
+	public String buy(HttpServletRequest request, Integer idTicket, Double valor, String dsEvento, String dtEvento) {
+		
+		CompraTO compraTO = new CompraTO();
+		GregorianCalendar cal = new GregorianCalendar();
+		
+		try {
+			cal.setTimeInMillis(System.currentTimeMillis());
+			
+			theatreWS.performBuy(idTicket);
+			compraTO.setEntity(new FiNgCompraCOMP());
+			
+			compraTO.getEntity().setCompDsEvento(dsEvento);
+			compraTO.getEntity().setCompDhEvento(dtEvento);
+			compraTO.getEntity().setCompDhCompra(cal.get(GregorianCalendar.DAY_OF_MONTH) +"/"+ (cal.get(GregorianCalendar.MONTH) + 1) +"/"+ cal.get(GregorianCalendar.YEAR));
+			compraTO.getEntity().setCompNrValor(valor);
+			compraTO.getEntity().setIdTickCdTicket(idTicket);
+			compraTO.getEntity().setFiCdClienteCLIE(gService.getEntity(FiCdClienteCLIE.class, getCurrentUser(request).getId()));
+			
+			gService.save(compraTO);
+		}
+		catch (Exception x) {
+			throw new FiException(x);
+		}
+
+		Map<String, Object> jsonMap;
+		jsonMap = new LinkedHashMap<String, Object>();
+		jsonMap.put("result", "OK");
+		return new JSONObject(jsonMap).toString();
+	}
+
+	@ModelAttribute("eventoTO")
+	public EventoWSTO getEventoTO() {		
+		return eventoTO;
+	}
+
+}

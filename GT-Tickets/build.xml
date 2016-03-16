@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="buildJar" name="Creates Jar">
+	
+	<property name="projectName" value="Tickets" />
+	
+    <target name="buildJar">
+    	
+		<war destfile="build/${projectName}.war" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="WebContent"/>
+			<lib dir="WebContent/WEB-INF/lib"/>
+			<classes dir="build/classes"/>
+		</war>
+    	
+    	<copy todir="build/scripts" overwrite="false">
+    	  <fileset file="dbScript.sql" />
+    	</copy>
+
+    </target>
+	
+</project>
