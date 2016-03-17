@@ -58,7 +58,7 @@ public final class ClienteServiceImpl extends AbstractService implements Cliente
 		ClienteTO resultClienteTO = null;
 		
 		try {
-			//Recuperando o usuário
+			//Recuperando o usuario
 			sql = new StringBuffer();
 			sql.append("select CLIE from FiCdClienteCLIE CLIE ").
 				append("where CLIE.clieDsLogin=:clieDsLogin and CLIE.clieDsPwd=:clieDsPwd ");
@@ -101,7 +101,7 @@ public final class ClienteServiceImpl extends AbstractService implements Cliente
 			
 			PropertyUtils.copyProperties(clieEntity, clienteTO.getEntity());
 
-			//Salvando  usuário
+			//Salvando  usuario
 			clieEntity.setId(idCliente);
 			clieEntity.setClieDsPwd(Encrypt.encrypt(clieEntity.getClieDsNome().toUpperCase(), clieEntity.getClieDsPwd().toUpperCase()));
 			getEM().merge(clieEntity);

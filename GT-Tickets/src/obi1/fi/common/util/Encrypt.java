@@ -7,7 +7,7 @@ public class Encrypt {
 	private static final Integer BYTE_SIZE = 4;
 	
 	/**
-	 * Construtor padrao - não pode ser instanciado.
+	 * Construtor padrao - nao pode ser instanciado.
 	 */
 	private Encrypt() { }
 	
