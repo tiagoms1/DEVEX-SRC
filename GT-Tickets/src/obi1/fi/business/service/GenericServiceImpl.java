@@ -36,7 +36,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 			boolean newRecord = (baseTO.getEntity().getId() == null || baseTO.getEntity().getId() < 0);
 			
 			if (!newRecord) {
-				entity = getEM().find(entityClass, id);
+				entity = (AbstractEntity) getEM().find(entityClass, id);
 				PropertyUtils.copyProperties(entity, baseTO.getEntity());
 				id = entity.getId();
 			}
@@ -58,7 +58,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 	@Override
 	public void delete(AbstractTO baseTO) {
 		try {
-			AbstractEntity entity = getEM().find(baseTO.getEntity().getEntityClass(), baseTO.getEntity().getId());
+			AbstractEntity entity = (AbstractEntity) getEM().find(baseTO.getEntity().getEntityClass(), baseTO.getEntity().getId());
 			getEM().remove(entity);
 		}
 		catch (Exception x) {
@@ -72,7 +72,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 	public void fillTO(AbstractTO baseTO) {
 		try {
 			if (baseTO.getEntity().getId() != null && baseTO.getEntity().getId() > 0) {
-				AbstractEntity entity = getEM().find(baseTO.getEntity().getEntityClass(), baseTO.getEntity().getId());
+				AbstractEntity entity = (AbstractEntity) getEM().find(baseTO.getEntity().getEntityClass(), baseTO.getEntity().getId());
 				baseTO.setEntity(entity);
 			}
 			else {
