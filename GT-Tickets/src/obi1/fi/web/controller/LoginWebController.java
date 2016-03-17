@@ -64,7 +64,7 @@ public final class LoginWebController extends AbstractController {
 	
 	@RequestMapping("logoutSess")
 	public ModelAndView logoutSess(HttpServletRequest request) {
-		request.setAttribute("msgError", "Sua sessão expirou. Favor logar novamente.");
+		request.setAttribute("msgError", "Sua sessao expirou. Favor logar novamente.");
 		return getLogout(request);
 	}
 	

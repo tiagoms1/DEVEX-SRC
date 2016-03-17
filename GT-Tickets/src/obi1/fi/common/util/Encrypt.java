@@ -7,7 +7,7 @@ public class Encrypt {
 	private static final Integer BYTE_SIZE = 4;
 	
 	/**
-	 * Construtor padrão - não pode ser instanciado.
+	 * Construtor padrao - não pode ser instanciado.
 	 */
 	private Encrypt() { }
 	
@@ -112,7 +112,7 @@ public class Encrypt {
 	}
 	
 	/**
-	 * Preenche string com zeros a esquerda para completar um número especifico de caracteres.
+	 * Preenche string com zeros a esquerda para completar um numero especifico de caracteres.
 	 * @param value string
 	 * @param size quantos caracteres a string deve ter no final
 	 * @return string com zeros a esquerda
@@ -126,9 +126,9 @@ public class Encrypt {
 	}
 	
 	/**
-	 * Retorna o valor numérico de um número em formato string.
+	 * Retorna o valor numerico de um numero em formato string.
 	 * @param value valor a ser convertido
-	 * @return valor numérico
+	 * @return valor numerico
 	 */
 	private static int unFillZero(String value) {
 		final boolean isNegative = value.indexOf("-") >= 0;

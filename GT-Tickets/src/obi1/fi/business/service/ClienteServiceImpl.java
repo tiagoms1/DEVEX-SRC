@@ -46,7 +46,7 @@ public final class ClienteServiceImpl extends AbstractService implements Cliente
 			clienteTO.setEntity(fiCdClienteCLIE);
 		}
 		catch (Exception x) {
-			throw new FiException(x, "Erro ao tentar localizar o Usuário");
+			throw new FiException(x, "Erro ao tentar localizar o Usuario");
 		}
 	}
 	
@@ -77,7 +77,7 @@ public final class ClienteServiceImpl extends AbstractService implements Cliente
 			throw new FiBusinessException(nre, "Senha incorreta");
 		}
 		catch (Exception x) {		
-			throw new FiException(x, "Erro ao tentar localizar o Usuário");
+			throw new FiException(x, "Erro ao tentar localizar o Usuario");
 		}
 			
 		return resultClienteTO;
@@ -107,7 +107,7 @@ public final class ClienteServiceImpl extends AbstractService implements Cliente
 			getEM().merge(clieEntity);
 		}
 		catch (Exception x) {
-			throw new FiException(x, "Erro salvando usuário " + x.getMessage());
+			throw new FiException(x, "Erro salvando usuario " + x.getMessage());
 		}
 
 	}

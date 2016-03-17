@@ -147,7 +147,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 				NUMERADORA.put(entityName, new NumeradoraTO(entityName, NUME_FIRST_ID, DEFAULT_NUME_APP_BUFFER - 1));
 			}
 			else {
-				//Pega o próximo range
+				//Pega o proximo range
 				getJDBC().execute(sqlUpdate.toString());
 				NUMERADORA.put(entityName, new NumeradoraTO(entityName, rowSet.getInt("NUME_NR_NEXTVAL"), 
 						(rowSet.getInt("NUME_NR_NEXTVAL") + rowSet.getInt("NUME_NR_APPBUFFER")) - 1));
@@ -158,12 +158,12 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 		numeradoraTO = NUMERADORA.get(entityName);
 		nextVal = numeradoraTO.getNextVal();
 
-		//Se chegar no limite, atualiza o banco e pega o próximo range
+		//Se chegar no limite, atualiza o banco e pega o proximo range
 		if (nextVal == numeradoraTO.getMaxBuffer().intValue()) {
 			rowSet = getJDBC().queryForRowSet(sqlQuery.toString());
 			rowSet.next();
 
-			//Pega o próximo range
+			//Pega o proximo range
 			getJDBC().execute(sqlUpdate.toString());
 			numeradoraTO.setMaxBuffer((rowSet.getInt("NUME_NR_NEXTVAL") + rowSet.getInt("NUME_NR_APPBUFFER")) - 1);
 		}
