@@ -81,7 +81,6 @@
 	
 	<div id="divMenu" style="float: left; display: block;">
 		<div class="menuItem" onclick="openUrl('../Home/load');" style="border-left: #CDCDCD 1px solid;">Home</div>
-		<div class="menuItem" onclick="openUrl('../Ticket/load?evenCdTipo=1');">Futebol</div>
 		<div class="menuItem" onclick="openUrl('../Ticket/load?evenCdTipo=2');">Shows</div>
 		<div class="menuItem" onclick="openUrl('../Ticket/load?evenCdTipo=3');">Teatro</div>
 		<div class="menuItem" onclick="openUrl('../Ticket/load?evenCdTipo=4');">Cinema</div>
