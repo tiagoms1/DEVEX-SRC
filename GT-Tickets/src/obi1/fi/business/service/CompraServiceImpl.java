@@ -30,7 +30,7 @@ public class CompraServiceImpl extends AbstractService implements CompraService 
 			resultList = dataQuery.getResultList();
 		}
 		catch (Exception x) {
-			throw new FiException(x, "Erro ao tentar localizar o Usuário");
+			throw new FiException(x, "Erro ao tentar localizar o Usuario");
 		}
 		
 		return resultList.toArray(new FiNgCompraCOMP[0]);
