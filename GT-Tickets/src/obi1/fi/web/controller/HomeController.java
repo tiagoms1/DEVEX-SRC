@@ -18,9 +18,7 @@ public final class HomeController extends AbstractController {
 	public ModelAndView load(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView("tiles.home");
 		
-		if (getCurrentUser(request) != null) {
-			
-		}
+		if (getCurrentUser(request) != null) { }
 		
 		return model;
 	}

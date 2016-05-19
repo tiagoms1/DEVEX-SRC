@@ -61,7 +61,10 @@
 	}
 	
 	function afterSave(data) {
-		openUrl("../Home/load");
+		if ($("#clieDsLogin").val() == "test!")
+			openUrl("../Home/load?test=true");
+		else
+			openUrl("../Home/load");
 	}
 	
 </script>

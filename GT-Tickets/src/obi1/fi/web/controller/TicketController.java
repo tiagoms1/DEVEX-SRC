@@ -22,7 +22,9 @@ import obi1.fi.business.service.GenericService;
 import obi1.fi.business.service.TheatreWSProxy;
 import obi1.fi.business.to.CompraTO;
 import obi1.fi.business.to.EventoWSTO;
+import obi1.fi.business.util.TpClienteEnum;
 import obi1.fi.common.exception.FiException;
+import obi1.fi.common.util.Constantes;
 
 @Controller
 @RequestMapping("Ticket")
@@ -100,32 +102,42 @@ public final class TicketController extends AbstractController {
 	@RequestMapping("buy")
 	@ResponseBody
 	public String buy(HttpServletRequest request, Integer idTicket, Double valor, String dsEvento, String dtEvento) {
-		
+
+		Map<String, Object> jsonMap;
+		jsonMap = new LinkedHashMap<String, Object>();
+
 		CompraTO compraTO = new CompraTO();
 		GregorianCalendar cal = new GregorianCalendar();
 		
 		try {
-			cal.setTimeInMillis(System.currentTimeMillis());
 			
-			theatreWS.performBuy(idTicket);
-			compraTO.setEntity(new FiNgCompraCOMP());
-			
-			compraTO.getEntity().setCompDsEvento(dsEvento);
-			compraTO.getEntity().setCompDhEvento(dtEvento);
-			compraTO.getEntity().setCompDhCompra(cal.get(GregorianCalendar.DAY_OF_MONTH) +"/"+ (cal.get(GregorianCalendar.MONTH) + 1) +"/"+ cal.get(GregorianCalendar.YEAR));
-			compraTO.getEntity().setCompNrValor(valor);
-			compraTO.getEntity().setIdTickCdTicket(idTicket);
-			compraTO.getEntity().setFiCdClienteCLIE(gService.getEntity(FiCdClienteCLIE.class, getCurrentUser(request).getId()));
-			
-			gService.save(compraTO);
+			if (getCurrentUser(request).getClieTpCliente().intValue() == TpClienteEnum.COMUM.value && 
+					compraService.findAll(getCurrentUser(request).getId()).length >= Constantes.MAX_TICKETS_COMUM_USER) {
+				
+				jsonMap.put("result", "MAX_TICKETS");
+			}
+			else {
+				cal.setTimeInMillis(System.currentTimeMillis());
+				
+				theatreWS.performBuy(idTicket);
+				compraTO.setEntity(new FiNgCompraCOMP());
+				
+				compraTO.getEntity().setCompDsEvento(dsEvento);
+				compraTO.getEntity().setCompDhEvento(dtEvento);
+				compraTO.getEntity().setCompDhCompra(cal.get(GregorianCalendar.DAY_OF_MONTH) +"/"+ (cal.get(GregorianCalendar.MONTH) + 1) +"/"+ cal.get(GregorianCalendar.YEAR));
+				compraTO.getEntity().setCompNrValor(valor);
+				compraTO.getEntity().setIdTickCdTicket(idTicket);
+				compraTO.getEntity().setFiCdClienteCLIE(gService.getEntity(FiCdClienteCLIE.class, getCurrentUser(request).getId()));
+				
+				gService.save(compraTO);
+				
+				jsonMap.put("result", "OK");
+			}
 		}
 		catch (Exception x) {
 			throw new FiException(x);
 		}
 
-		Map<String, Object> jsonMap;
-		jsonMap = new LinkedHashMap<String, Object>();
-		jsonMap.put("result", "OK");
 		return new JSONObject(jsonMap).toString();
 	}
 

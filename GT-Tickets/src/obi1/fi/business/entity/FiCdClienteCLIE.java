@@ -29,6 +29,12 @@ public class FiCdClienteCLIE extends AbstractEntity implements Serializable {
 	@Column(name = "CLIE_DS_NUMCARTAO", length = 50)
 	private String clieDsNumcartao;
 
+	@Column(name = "CLIE_TP_CARTAO")
+	private Integer clieTpCartao;
+
+	@Column(name = "CLIE_TP_CLIENTE")
+	private Integer clieTpCliente;
+
 	@Column(name = "CLIE_DS_LOGIN", unique = true, length = 10)
 	private String clieDsLogin;
 
@@ -106,6 +112,26 @@ public class FiCdClienteCLIE extends AbstractEntity implements Serializable {
 
 	public void setClieDsPwd(String clieDsPwd) {
 		this.clieDsPwd = clieDsPwd;
+	}
+
+	public Integer getClieTpCartao() {
+		return clieTpCartao;
+	}
+
+	public void setClieTpCartao(Integer clieTpCartao) {
+		this.clieTpCartao = clieTpCartao;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Integer getClieTpCliente() {
+		return clieTpCliente;
+	}
+
+	public void setClieTpCliente(Integer clieTpCliente) {
+		this.clieTpCliente = clieTpCliente;
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import obi1.fi.business.service.ClienteService;
 import obi1.fi.business.to.ClienteTO;
+import obi1.fi.business.util.TpClienteEnum;
 import obi1.fi.web.exception.FiAjaxException;
 import obi1.fi.web.interceptor.AuthenticationUser;
 
@@ -43,11 +44,24 @@ public final class LoginWebController extends AbstractController {
 		return model;
 	}
 
+	@RequestMapping("dadosCliente")
+	public ModelAndView dadosCliente(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView("tiles.cadastro.consulta");
+		
+		clienteTO = new ClienteTO();
+		clienteTO.getEntity().setId(getCurrentUser(request).getId());
+		userService.fillTO(clienteTO);
+		model.addObject("clienteTO", clienteTO);
+
+		return model;
+	}
+	
 	@RequestMapping("saveNew")
 	@ResponseBody
 	public String saveNew(HttpServletRequest request, HttpServletResponse response, ClienteTO clienteTO) {
 
 		try {
+			clienteTO.getEntity().setClieTpCliente(TpClienteEnum.COMUM.value);
 			userService.save(clienteTO);
 		}
 		catch (Exception x) {

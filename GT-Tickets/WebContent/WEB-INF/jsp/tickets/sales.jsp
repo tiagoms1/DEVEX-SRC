@@ -53,7 +53,8 @@
 			});
 		}
 		else {
-			callAjax("../Ticket/retrieveSales", "", function(data){
+			var test = ($("#idCliente").val() == "-1" ? "?test=true" : "");
+			callAjax("../Ticket/retrieveSales" + test, "", function(data){
 				if (data.result != undefined) {
 					for (i = 0; i < data.result.length; i++) {
 						var newLine = $("<div class='contentLine'></div>");

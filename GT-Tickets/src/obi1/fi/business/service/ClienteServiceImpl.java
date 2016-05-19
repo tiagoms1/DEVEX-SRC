@@ -40,7 +40,7 @@ public final class ClienteServiceImpl extends AbstractService implements Cliente
 				Query dataQuery = getEM().createQuery(sql.toString());
 				dataQuery.setParameter("idCliente", clienteTO.getEntity().getId());
 				
-				fiCdClienteCLIE = (FiCdClienteCLIE) ((Object[]) dataQuery.getSingleResult())[0];
+				fiCdClienteCLIE = (FiCdClienteCLIE) dataQuery.getSingleResult();
 			}
 			
 			clienteTO.setEntity(fiCdClienteCLIE);

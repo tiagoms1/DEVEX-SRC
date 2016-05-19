@@ -71,6 +71,10 @@
 		$("#idd").html("Bem vindo, "+ $("#clieDsNome").val() +"!");
 	});
 	
+	function openMenu(url) {
+		openUrl(url);
+	}
+	
 </script>
 
 <div class="mainMenu">
@@ -80,19 +84,20 @@
 	<div id="divLogo" style="float: left;"><img src="../../img/logoTickets.png" /></div>
 	
 	<div id="divMenu" style="float: left; display: block;">
-		<div class="menuItem" onclick="openUrl('../Home/load');" style="border-left: #CDCDCD 1px solid;">Home</div>
-		<div class="menuItem" onclick="openUrl('../Ticket/load?evenCdTipo=1');">Futebol</div>
-		<div class="menuItem" onclick="openUrl('../Ticket/load?evenCdTipo=2');">Shows</div>
-		<div class="menuItem" onclick="openUrl('../Ticket/load?evenCdTipo=3');">Teatro</div>
-		<div class="menuItem" onclick="openUrl('../Ticket/load?evenCdTipo=4');">Cinema</div>
-		<div class="menuItem" onclick="openUrl('../Ticket/load?evenCdTipo=5');">Lutas</div>
+		<div class="menuItem" onclick="openMenu('../Home/load');" style="border-left: #CDCDCD 1px solid;">Home</div>
+		<div class="menuItem" onclick="openMenu('../Ticket/load?evenCdTipo=1');">Futebol</div>
+		<div class="menuItem" onclick="openMenu('../Ticket/load?evenCdTipo=2');">Shows</div>
+		<div class="menuItem" onclick="openMenu('../Ticket/load?evenCdTipo=3');">Teatro</div>
+		<div class="menuItem" onclick="openMenu('../Ticket/load?evenCdTipo=4');">Cinema</div>
+		<div class="menuItem" onclick="openMenu('../Ticket/load?evenCdTipo=5');">Lutas</div>
 		
-		<div id="menuLogin" class="menuItem" style="display: none;" onclick="openUrl('../LoginWeb/logout');">Entrar...</div>
+		<div id="menuLogin" class="menuItem" style="display: none;" onclick="openMenu('../LoginWeb/logout');">Entrar...</div>
 		<div id="menuConta" class="userData" style="display: none;">
 			<div id="idd"></div>
 			<div id="iddOpcoes">
-				<a onclick="openUrl('../Ticket/sales');">[Meus Tickets]</a>
-				<a onclick="openUrl('../LoginWeb/logout');">[Sair]</a>
+				<a onclick="openMenu('../LoginWeb/dadosCliente');">[Meus Dados]</a>
+				<a onclick="openMenu('../Ticket/sales');">[Meus Tickets]</a>
+				<a onclick="openMenu('../LoginWeb/logout');">[Sair]</a>
 			</div>
 		</div>
 	</div>

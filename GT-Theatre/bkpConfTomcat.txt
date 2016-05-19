@@ -1,4 +1,5 @@
-      <Context docBase="GalaxyTicketsTheatre" path="/GalaxyTicketsTheatre" reloadable="true" source="org.eclipse.jst.jee.server:GalaxyTicketsTheatre">
+
+      <Context docBase="GT-Theatre" path="/Theatre" reloadable="true" source="org.eclipse.jst.jee.server:GalaxyTicketsTheatre">
 			<Resource name="jdbc/TheatreDB"
 						auth="Container"
 						type="javax.sql.DataSource"
@@ -10,7 +11,7 @@
 						maxIdle="3"/>
       </Context>
       
-      <Context docBase="GalaxyTicketsWeb" path="/GalaxyTicketsWeb" reloadable="true" source="org.eclipse.jst.jee.server:GalaxyTicketsWeb">
+      <Context docBase="GT-Tickets" path="/Tickets" reloadable="true" source="org.eclipse.jst.jee.server:GalaxyTicketsWeb">
 			<Resource name="jdbc/TicketsDB"
 						auth="Container"
 						type="javax.sql.DataSource"

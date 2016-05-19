@@ -54,7 +54,8 @@
 		if ($("#idCliente").val() == "")
 			$(".btnComprar").hide();
 		
-		callAjax("../Ticket/retrieve", formSerialize($("form")), function(data){
+		var test = ($("#idCliente").val() == "-1" ? "?test=true" : "");
+		callAjax("../Ticket/retrieve"+ test, formSerialize($("form")), function(data){
 			if (data.result != undefined) {
 				for (i = 0; i < data.result.length; i++) {
 					var divTK = $("<div class='ticket'></div>");
@@ -112,23 +113,32 @@
 	
 	function compraFase1(id) {
 		waitMessage("Aguardando autorização do cartão de crédito");
-		setTimeout(function() {compraFase2(id);}, 4000);
+		setTimeout(function() {compraFase2(id);}, 2000);
 	}
 
 	function compraFase2(id) {
 		waitMessage("Estabelecendo conexão com a casa de shows");
-		setTimeout(function() {compraFase3(id);}, 3000);
+		setTimeout(function() {compraFase3(id);}, 2000);
 	}
 	
 	function compraFase3(id) {
-		callAjax("../Ticket/buy", "idTicket="+ $("#cmbOpcao"+ id).val() +
+		var test = ($("#idCliente").val() == "-1" ? "?test=true" : "");
+		callAjax("../Ticket/buy"+ test, "idTicket="+ $("#cmbOpcao"+ id).val() +
 				"&valor="+ $("#cmbOpcao"+ id)[0].options[$("#cmbOpcao"+ id)[0].selectedIndex].getAttribute("valor") +
 				"&dsEvento="+ $("#cmbOpcao"+ id)[0].options[$("#cmbOpcao"+ id)[0].selectedIndex].getAttribute("dsEvento") +
 				"&dtEvento="+ $("#cmbOpcao"+ id)[0].options[$("#cmbOpcao"+ id)[0].selectedIndex].getAttribute("dtEvento"), function(data){
 			
-			showDialog(TYPE_CONFIRM, "Ticket", "Parabéns, sua compra foi autorizada!", function() {
-				openUrl("../Ticket/sales");
-			});
+			if (data.result == "OK") {
+				showDialog(TYPE_CONFIRM, "Ticket", "Parabéns, sua compra foi autorizada!", function() {
+					openUrl("../Ticket/sales"+ test);
+				});
+			}
+			else if (data.result == "MAX_TICKETS") {
+				showDialog(TYPE_CONFIRM, "Ticket", "Sua compra não foi autorizada.", function() {
+					showDialog(TYPE_ERROR, "Ticket", "Você atingiu a quantidade máxima permitida para compras on-line. Favor entrar em contato por telefone.");
+				});
+			}
+			
 		});
 	}
 	

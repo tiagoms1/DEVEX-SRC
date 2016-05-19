@@ -23,6 +23,9 @@
 	<definition name="tiles.cadastro" extends="tiles.template">
 		<put-attribute name="body" value="/WEB-INF/jsp/common/cadastro.jsp" />
 	</definition>
+	<definition name="tiles.cadastro.consulta" extends="tiles.template">
+		<put-attribute name="body" value="/WEB-INF/jsp/common/meusDados.jsp" />
+	</definition>
 
 	<!-- TICKETS LIST -->
 	<definition name="tiles.ticketsList" extends="tiles.template">

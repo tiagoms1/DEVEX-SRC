@@ -13,5 +13,17 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/LIB/Selenium/selenium-java-2.53.0.jar"/>
+	<classpathentry kind="lib" path="/LIB/JUnit/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="/LIB/Hamcrest/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="/LIB/Google/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/LIB/Google/guava-19.0.jar"/>
+	<classpathentry kind="lib" path="/LIB/Apache/httpclient-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/LIB/Apache/httpcore-4.4.3.jar"/>
+	<classpathentry kind="lib" path="/LIB/Apache/httpmime-4.5.jar"/>
+	<classpathentry kind="lib" path="/LIB/Apache/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="/LIB/Apache/commons-exec-1.3.jar"/>
+	<classpathentry kind="lib" path="/LIB/Apache/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/LIB/Selenium/selenium-server-standalone-2.44.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

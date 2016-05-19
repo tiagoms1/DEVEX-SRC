@@ -41,7 +41,7 @@ public abstract class AbstractController {
 	protected final FiCdClienteCLIE getCurrentUser(HttpServletRequest request) {
 		return (FiCdClienteCLIE) request.getSession().getAttribute("FiCdClienteCLIE");
 	}
-	
+
 	@ExceptionHandler(FiException.class)
 	public final String handleException(Exception ex, HttpServletRequest request) {
 		if (request.getAttribute(msgError) == null || "".equals(request.getAttribute(msgError))) {
