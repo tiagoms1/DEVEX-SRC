@@ -20,7 +20,8 @@
     	
     	<mkdir dir="build/classes"/>
     	
-    	<javac includeantruntime="false" srcdir="src" destdir="build/classes" 
+    	<javac 
+    		includeantruntime="false" srcdir="src" destdir="build/classes" 
     		fork="yes"
     		compiler="javac1.7"
     		classpathref="classpath"/>

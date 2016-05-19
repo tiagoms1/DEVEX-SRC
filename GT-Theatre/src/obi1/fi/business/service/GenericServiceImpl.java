@@ -36,7 +36,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 			boolean newRecord = (baseTO.getEntity().getId() == null || baseTO.getEntity().getId() < 0);
 			
 			if (!newRecord) {
-				entity = getEM().find(entityClass, id);
+				entity = (AbstractEntity) getEM().find(entityClass, id);
 				PropertyUtils.copyProperties(entity, baseTO.getEntity());
 				id = entity.getId();
 			}
