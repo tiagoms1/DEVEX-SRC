@@ -134,7 +134,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 		
 		//Se ainda nao tiver com o valor armazenado, pega do banco
 		if (NUMERADORA.get(entityName) == null) {
-			//Se não existir no banco, cria na hora
+			//Se nao existir no banco, cria na hora
 			rowSet = getJDBC().queryForRowSet(sqlQuery.toString());
 			if (!rowSet.next()) {
 				StringBuffer sqlInsert = new StringBuffer();

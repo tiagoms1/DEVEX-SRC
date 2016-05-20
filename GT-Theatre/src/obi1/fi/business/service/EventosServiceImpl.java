@@ -65,7 +65,6 @@ public final class EventosServiceImpl extends AbstractService implements Eventos
 			
 			PropertyUtils.copyProperties(evenEntity, eventoTO.getEntity());
 
-			//Salvando  usuário
 			evenEntity.setId(idEvento);
 			getEM().merge(evenEntity);
 		}

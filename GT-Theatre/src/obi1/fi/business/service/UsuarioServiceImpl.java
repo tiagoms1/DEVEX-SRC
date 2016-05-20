@@ -46,7 +46,7 @@ public final class UsuarioServiceImpl extends AbstractService implements Usuario
 			usuarioTO.setEntity(fiCdUsuarioUSUA);
 		}
 		catch (Exception x) {
-			throw new FiException(x, "Erro ao tentar localizar o Usuário");
+			throw new FiException(x, "Erro ao tentar localizar o Usuario");
 		}
 	}
 	
@@ -77,7 +77,7 @@ public final class UsuarioServiceImpl extends AbstractService implements Usuario
 			throw new FiBusinessException(nre, "Senha incorreta");
 		}
 		catch (Exception x) {		
-			throw new FiException(x, "Erro ao tentar localizar o Usuário");
+			throw new FiException(x, "Erro ao tentar localizar o Usuario");
 		}
 			
 		return resultUsuarioTO;
@@ -106,7 +106,7 @@ public final class UsuarioServiceImpl extends AbstractService implements Usuario
 			getEM().merge(usuaEntity);
 		}
 		catch (Exception x) {
-			throw new FiException(x, "Erro salvando usuário " + x.getMessage());
+			throw new FiException(x, "Erro salvando usuario " + x.getMessage());
 		}
 
 	}

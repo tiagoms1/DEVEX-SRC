@@ -91,7 +91,7 @@ public final class TicketsController extends AbstractController {
 			service.delete(ticketTO);
 		} 
 		catch (DataIntegrityViolationException x) {
-			throw new FiException("Este registro não pode ser excluído pois está sendo utilizado.");
+			throw new FiException("Este registro nao pode ser excluido pois esta sendo utilizado.");
 		}
 		catch (Exception x) {
 			throw new FiException(x);
