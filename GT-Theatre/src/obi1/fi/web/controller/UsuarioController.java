@@ -19,10 +19,6 @@ import obi1.fi.business.to.UsuarioTO;
 import obi1.fi.common.exception.FiException;
 import obi1.fi.common.util.Encrypt;
 
-/**
- * Controller para a funcionalidade de cadastro de usuários.
- *
- */
 @Controller
 @RequestMapping("Usuario")
 @Scope("request")
@@ -36,17 +32,10 @@ public final class UsuarioController extends AbstractController {
 
 	private UsuarioTO usuarioTO;
 	
-	/**
-	 * Construtor padrão do controller.
-	 */
 	public UsuarioController() {
 		usuarioTO = new UsuarioTO();
 	}
 	
-	/**
-	 * Abre a tela com a relação com os usuarios cadastrados.
-	 * @return modelAndView da tela de lista
-	 */
 	@RequestMapping("list")
 	public ModelAndView list() {
 		ModelAndView model = new ModelAndView("tiles.adm.usuario.list");
@@ -55,11 +44,6 @@ public final class UsuarioController extends AbstractController {
 		return model;
 	}
 
-	/**
-	 * Retorna o resulttable com o resultado da pesquisa.
-	 * @param usuarioTO to com os filtros preenchidos
-	 * @return Json com o resulttable com o resultado da pesquisa
-	 */
 	@RequestMapping("retrieve")
 	@ResponseBody
 	public String retrieve(UsuarioTO usuarioTO) {
@@ -73,11 +57,6 @@ public final class UsuarioController extends AbstractController {
 		return getJsonResultTable(usuarioTO);
 	}
 
-	/**
-	 * Abre a tela de edição do usuario.
-	 * @param usuarioTO TO de usuario
-	 * @return tela de edição
-	 */
 	@RequestMapping("edit")
 	public String edit(UsuarioTO usuarioTO) {
 		usuarioService.fillTO(usuarioTO);
@@ -85,13 +64,6 @@ public final class UsuarioController extends AbstractController {
 		return "tiles.adm.usuario.edit";
 	}
 
-	/**
-	 * Salva senha do usuario.
-	 * @param request request
-	 * @param response response.
-	 * @param usuarioTO usuarioTO
-	 * @return pagina de alteração de senha
-	 */
 	@RequestMapping("savepwd")
 	@ResponseBody
 	public String savePwd(HttpServletRequest request, HttpServletResponse response, UsuarioTO usuarioTO) {
@@ -108,12 +80,6 @@ public final class UsuarioController extends AbstractController {
 		return getJsonSuccess("system.message.senha.success");
 	}
 	
-	/**
-	 * Salva o usuário.
-	 * @param usuarioTO usuarioTO
-	 * @param request request
-	 * @return lista de usuarios cadastrados
-	 */
 	@RequestMapping("save")
 	@ResponseBody
 	public String save(HttpServletRequest request, UsuarioTO usuarioTO) {
@@ -133,12 +99,6 @@ public final class UsuarioController extends AbstractController {
 		return result;
 	}
 
-	/**
-	 * Deleta um usuário.
-	 * @param request request 
-	 * @param usuarioTO usuarioTO
-	 * @return String mensagem de sucesso ou falha
-	 */
 	@RequestMapping("delete")
 	@ResponseBody
 	public String delete(HttpServletRequest request, UsuarioTO usuarioTO) {
@@ -146,7 +106,7 @@ public final class UsuarioController extends AbstractController {
 			service.delete(usuarioTO);
 		} 
 		catch (DataIntegrityViolationException x) {
-			throw new FiException("Este registro não pode ser excluído pois está sendo utilizado.");
+			throw new FiException("Este registro nao pode ser excluido pois esta sendo utilizado.");
 		}
 		catch (Exception x) {
 			throw new FiException(x);
@@ -155,21 +115,12 @@ public final class UsuarioController extends AbstractController {
 		return getJsonSuccess("system.message.success");
 	}
 	
-	/**
-	 * Acessa pagina de alteração de senha do usuarioTO.
-	 * @param request request
-	 * @return pagina de alteração de senha
-	 */
 	@RequestMapping("changepwd")
 	public String changePwd(HttpServletRequest request) {
 		usuarioTO.setEntity((FiCdUsuarioUSUA) request.getSession().getAttribute("FiCdUsuarioUSUA"));
 		return "tiles.adm.usuario.changepwd";
 	}
 	
-	/**
-	 * Retorna o model do controller.
-	 * @return model
-	 */
 	@ModelAttribute("usuarioTO")
 	public UsuarioTO getUsuarioTO() {		
 		return usuarioTO;

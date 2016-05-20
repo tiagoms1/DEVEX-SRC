@@ -58,7 +58,7 @@ public final class UsuarioServiceImpl extends AbstractService implements Usuario
 		UsuarioTO resultUsuarioTO = null;
 		
 		try {
-			//Recuperando o usuário
+			//Recuperando o usuario
 			sql = new StringBuffer();
 			sql.append("select USUA from FiCdUsuarioUSUA USUA ").
 				append("where USUA.usuaDsLogin=:usuaDsLogin and USUA.usuaDsPwd=:usuaDsPwd ");
@@ -101,7 +101,7 @@ public final class UsuarioServiceImpl extends AbstractService implements Usuario
 			
 			PropertyUtils.copyProperties(usuaEntity, usuarioTO.getEntity());
 
-			//Salvando  usuário
+			//Salvando  usuario
 			usuaEntity.setId(idUsuario);
 			getEM().merge(usuaEntity);
 		}
@@ -140,13 +140,6 @@ public final class UsuarioServiceImpl extends AbstractService implements Usuario
 		
 	}
 	
-	/**
-	 * Cria o map com os critérios de busca da query.
-	 * @param usuarioTO TO
-	 * @param criteriaList lista de critérios
-	 * @param parameterMap map prenchido
-	 * @throws ParseException 
-	 */
 	private void setCriteriasQueryParameters(UsuarioTO usuarioTO, List<String> criteriaList, Map<String, Object> parameterMap) throws ParseException {
 		
 		//Nome do usuario

@@ -23,7 +23,6 @@ public final class GenericHandlerInterceptorAdapter extends HandlerInterceptorAd
 			request.getSession().setAttribute(strMsgError, null);
 		}
 
-		//Se estiver conectado, verifica se usuário está logado
 		if (!(handler instanceof LoginController)) {
 			authenticationUser.initAuthentication(request, response, handler);
 		}

@@ -5,7 +5,6 @@ import obi1.fi.common.to.DataTableTO;
 
 public final class EventoTO extends AbstractTO<FiCdEventoEVEN> {
 
-	//Atributos para utilização do filtro
 	private Integer idEvento;
 	
 	private String titulo;

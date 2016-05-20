@@ -44,7 +44,7 @@ public final class TicketsServiceImpl extends AbstractService implements Tickets
 			ticketTO.setEntity(fiCdTicketTICK);
 		}
 		catch (Exception x) {
-			throw new FiException(x, "Erro ao tentar localizar o Usuário");
+			throw new FiException(x, "Erro ao tentar localizar o Usuario");
 		}
 	}
 	
@@ -66,12 +66,12 @@ public final class TicketsServiceImpl extends AbstractService implements Tickets
 			
 			PropertyUtils.copyProperties(tickEntity, ticketTO.getEntity());
 
-			//Salvando  usuário
+			//Salvando  usuario
 			tickEntity.setId(idTicket);
 			getEM().merge(tickEntity);
 		}
 		catch (Exception x) {
-			throw new FiException(x, "Erro salvando usuário " + x.getMessage());
+			throw new FiException(x, "Erro salvando usuario " + x.getMessage());
 		}
 
 	}

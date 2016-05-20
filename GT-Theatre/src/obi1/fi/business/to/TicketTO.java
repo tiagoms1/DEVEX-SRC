@@ -9,7 +9,6 @@ import obi1.fi.common.to.DataTableTO;
 
 public final class TicketTO extends AbstractTO<FiCdTicketTICK> {
 
-	//Atributos para utilização do filtro
 	private Integer idEvento;
 	
 	private String descricao;
@@ -18,7 +17,7 @@ public final class TicketTO extends AbstractTO<FiCdTicketTICK> {
 	
 	public TicketTO() {
 		DataTableTO dataTable = new DataTableTO("fiCdEventoEVEN.evenDsTitulo", "tickDsDescricao", "tickNrValor", "tickNrDisponivel");
-		dataTable.setHeader("Evento", "Descrição", "Valor", "Qtd Disponível");
+		dataTable.setHeader("Evento", "Descricao", "Valor", "Qtd Disponivel");
 		setResultTable(dataTable);
 		setEntity(new FiCdTicketTICK());
 	}

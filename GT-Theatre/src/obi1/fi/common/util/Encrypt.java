@@ -6,17 +6,8 @@ public class Encrypt {
 	
 	private static final Integer BYTE_SIZE = 4;
 	
-	/**
-	 * Construtor padrão - não pode ser instanciado.
-	 */
 	private Encrypt() { }
 	
-	/**
-	 * Criptografa uma string.
-	 * @param key chave para criptografia
-	 * @param value valor a ser criptografado
-	 * @return string criptografada
-	 */
 	public static String encrypt(String key, String value) {
 		
 		String result = "";
@@ -68,12 +59,6 @@ public class Encrypt {
 		return result;
 	}
 	
-	/**
-	 * Descriptografa uma string.
-	 * @param key chave para descriptografia
-	 * @param value valor criptografado
-	 * @return string descriptografada
-	 */
 	public static String decrypt(String key, String value) {
 		
 		String result = "";
@@ -111,12 +96,6 @@ public class Encrypt {
 		return result;
 	}
 	
-	/**
-	 * Preenche string com zeros a esquerda para completar um número especifico de caracteres.
-	 * @param value string
-	 * @param size quantos caracteres a string deve ter no final
-	 * @return string com zeros a esquerda
-	 */
 	private static String fillZero(String value, int size) {
 		String result = value;
 		while (result.length() < size) {
@@ -125,11 +104,6 @@ public class Encrypt {
 		return result;
 	}
 	
-	/**
-	 * Retorna o valor numérico de um número em formato string.
-	 * @param value valor a ser convertido
-	 * @return valor numérico
-	 */
 	private static int unFillZero(String value) {
 		final boolean isNegative = value.indexOf("-") >= 0;
 		String result = value.replaceAll("-", "");

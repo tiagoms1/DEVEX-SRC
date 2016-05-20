@@ -5,7 +5,6 @@ import obi1.fi.common.to.DataTableTO;
 
 public final class UsuarioTO extends AbstractTO<FiCdUsuarioUSUA> {
 
-	//Atributos para utilização do filtro
 	private String nomeUsua;
 	
 	private String login;

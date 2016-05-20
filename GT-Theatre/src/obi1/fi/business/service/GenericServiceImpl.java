@@ -58,7 +58,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 	@Override
 	public void delete(AbstractTO baseTO) {
 		try {
-			AbstractEntity entity = getEM().find(baseTO.getEntity().getEntityClass(), baseTO.getEntity().getId());
+			AbstractEntity entity = (AbstractEntity) getEM().find(baseTO.getEntity().getEntityClass(), baseTO.getEntity().getId());
 			getEM().remove(entity);
 		}
 		catch (Exception x) {
@@ -72,7 +72,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 	public void fillTO(AbstractTO baseTO) {
 		try {
 			if (baseTO.getEntity().getId() != null && baseTO.getEntity().getId() > 0) {
-				AbstractEntity entity = getEM().find(baseTO.getEntity().getEntityClass(), baseTO.getEntity().getId());
+				AbstractEntity entity = (AbstractEntity) getEM().find(baseTO.getEntity().getEntityClass(), baseTO.getEntity().getId());
 				baseTO.setEntity(entity);
 			}
 			else {
@@ -132,7 +132,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 		sqlUpdate.append("UPDATE FI_NG_NUMERADORA_NUME SET NUME_NR_NEXTVAL = NUME_NR_NEXTVAL + NUME_NR_APPBUFFER WHERE NUME_DS_ENTITY = '").append(entityName).append("'");
 
 		
-		//Se ainda não tiver com o valor armazenado, pega do banco
+		//Se ainda nao tiver com o valor armazenado, pega do banco
 		if (NUMERADORA.get(entityName) == null) {
 			//Se não existir no banco, cria na hora
 			rowSet = getJDBC().queryForRowSet(sqlQuery.toString());
@@ -147,7 +147,7 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 				NUMERADORA.put(entityName, new NumeradoraTO(entityName, NUME_FIRST_ID, DEFAULT_NUME_APP_BUFFER - 1));
 			}
 			else {
-				//Pega o próximo range
+				//Pega o proximo range
 				getJDBC().execute(sqlUpdate.toString());
 				NUMERADORA.put(entityName, new NumeradoraTO(entityName, rowSet.getInt("NUME_NR_NEXTVAL"), 
 						(rowSet.getInt("NUME_NR_NEXTVAL") + rowSet.getInt("NUME_NR_APPBUFFER")) - 1));
@@ -158,12 +158,12 @@ public final class GenericServiceImpl extends AbstractService implements Generic
 		numeradoraTO = NUMERADORA.get(entityName);
 		nextVal = numeradoraTO.getNextVal();
 
-		//Se chegar no limite, atualiza o banco e pega o próximo range
+		//Se chegar no limite, atualiza o banco e pega o proximo range
 		if (nextVal == numeradoraTO.getMaxBuffer().intValue()) {
 			rowSet = getJDBC().queryForRowSet(sqlQuery.toString());
 			rowSet.next();
 
-			//Pega o próximo range
+			//Pega o proximo range
 			getJDBC().execute(sqlUpdate.toString());
 			numeradoraTO.setMaxBuffer((rowSet.getInt("NUME_NR_NEXTVAL") + rowSet.getInt("NUME_NR_APPBUFFER")) - 1);
 		}
