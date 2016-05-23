@@ -133,6 +133,7 @@
 
 		<input type="hidden" value="${FiCdClienteCLIE.id}" id="idCliente"/>
 		<input type="hidden" value="${FiCdClienteCLIE.clieDsNome}" id="clieDsNome"/>
+		<input type="hidden" value="${FiCdClienteCLIE.clieTpCartao}" id="clieTpCartao"/>
 
 		<div id="divWait" style="display: none;">
 			<div style="float: left; padding-top: 15px; margin-left: 20px;">

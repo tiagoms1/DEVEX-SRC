@@ -106,6 +106,12 @@
 		}
 		else {
 			showDialog(TYPE_QUESTION, "Ticket", "Confirma a compra desse ingresso?", function () {
+				
+				//Se for AMEX
+				if ($("#clieTpCartao").val() == "3") {
+					prompt("Digite o PIN do cartao AMEX:", "");
+				}
+				
 				compraFase1(id);
 			});
 		}
@@ -134,8 +140,9 @@
 				});
 			}
 			else if (data.result == "MAX_TICKETS") {
-				showDialog(TYPE_CONFIRM, "Ticket", "Sua compra não foi autorizada.", function() {
-					showDialog(TYPE_ERROR, "Ticket", "Você atingiu a quantidade máxima permitida para compras on-line. Favor entrar em contato por telefone.");
+				
+				showDialog(TYPE_ERROR, "Ticket", "ERRO: Você atingiu a quantidade máxima permitida para compras on-line. Deseja entrar com outro usuario?", function() {
+					openMenu('../LoginWeb/logout');
 				});
 			}
 			
