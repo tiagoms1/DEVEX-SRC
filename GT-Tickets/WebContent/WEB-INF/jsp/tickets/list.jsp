@@ -109,7 +109,7 @@
 				
 				//Se for AMEX
 				if ($("#clieTpCartao").val() == "3") {
-					openUrl("Digite o PIN do cartao AMEX:");
+					prompt("Digite o PIN do cartao AMEX:", "");
 				}
 				
 				compraFase1(id);
