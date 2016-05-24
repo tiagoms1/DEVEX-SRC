@@ -22,6 +22,7 @@ import obi1.fi.business.service.GenericService;
 import obi1.fi.business.service.TheatreWSProxy;
 import obi1.fi.business.to.CompraTO;
 import obi1.fi.business.to.EventoWSTO;
+import obi1.fi.business.to.TicketWSTO;
 import obi1.fi.business.util.TpClienteEnum;
 import obi1.fi.common.exception.FiException;
 import obi1.fi.common.util.Constantes;
@@ -101,7 +102,7 @@ public final class TicketController extends AbstractController {
 
 	@RequestMapping("buy")
 	@ResponseBody
-	public String buy(HttpServletRequest request, Integer idTicket, Double valor, String dsEvento, String dtEvento) {
+	public String buy(HttpServletRequest request, TicketWSTO ticketTO) {
 
 		Map<String, Object> jsonMap;
 		jsonMap = new LinkedHashMap<String, Object>();
@@ -119,14 +120,14 @@ public final class TicketController extends AbstractController {
 			else {
 				cal.setTimeInMillis(System.currentTimeMillis());
 				
-				theatreWS.performBuy(idTicket);
+				theatreWS.performBuy(ticketTO.getIdTickCdTicket());
 				compraTO.setEntity(new FiNgCompraCOMP());
 				
-				compraTO.getEntity().setCompDsEvento(dsEvento);
-				compraTO.getEntity().setCompDhEvento(dtEvento);
+				compraTO.getEntity().setCompDsEvento(ticketTO.getTickDsDescricao());
+				compraTO.getEntity().setCompDhEvento("10/10/10");
 				compraTO.getEntity().setCompDhCompra(cal.get(GregorianCalendar.DAY_OF_MONTH) +"/"+ (cal.get(GregorianCalendar.MONTH) + 1) +"/"+ cal.get(GregorianCalendar.YEAR));
-				compraTO.getEntity().setCompNrValor(valor);
-				compraTO.getEntity().setIdTickCdTicket(idTicket);
+				compraTO.getEntity().setCompNrValor(ticketTO.getTickNrValor());
+				compraTO.getEntity().setIdTickCdTicket(ticketTO.getIdTickCdTicket());
 				compraTO.getEntity().setFiCdClienteCLIE(gService.getEntity(FiCdClienteCLIE.class, getCurrentUser(request).getId()));
 				
 				gService.save(compraTO);

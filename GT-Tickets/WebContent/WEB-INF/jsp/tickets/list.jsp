@@ -128,15 +128,14 @@
 	}
 	
 	function compraFase3(id) {
-		var test = ($("#idCliente").val() == "-1" ? "?test=true" : "");
-		callAjax("../Ticket/buy"+ test, "idTicket="+ $("#cmbOpcao"+ id).val() +
-				"&valor="+ $("#cmbOpcao"+ id)[0].options[$("#cmbOpcao"+ id)[0].selectedIndex].getAttribute("valor") +
-				"&dsEvento="+ $("#cmbOpcao"+ id)[0].options[$("#cmbOpcao"+ id)[0].selectedIndex].getAttribute("dsEvento") +
-				"&dtEvento="+ $("#cmbOpcao"+ id)[0].options[$("#cmbOpcao"+ id)[0].selectedIndex].getAttribute("dtEvento"), function(data){
+		callAjax("../Ticket/buy", "idTickCdTicket="+ $("#cmbOpcao"+ id).val() +
+				"&tickNrValor="+ $("#cmbOpcao"+ id)[0].options[$("#cmbOpcao"+ id)[0].selectedIndex].getAttribute("valor") +
+				"&tickDsDescricao="+ $("#cmbOpcao"+ id)[0].options[$("#cmbOpcao"+ id)[0].selectedIndex].getAttribute("dsEvento"), 
+				function(data){
 			
 			if (data.result == "OK") {
 				showDialog(TYPE_CONFIRM, "Ticket", "Parabéns, sua compra foi autorizada!", function() {
-					openUrl("../Ticket/sales"+ test);
+					openUrl("../Ticket/sales");
 				});
 			}
 			else if (data.result == "MAX_TICKETS") {
